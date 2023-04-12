@@ -3,7 +3,7 @@ import { gql, useLazyQuery } from "@apollo/client";
 import "./App.css";
 import Input from "./components/Input";
 
-const CALCULATE_LOAN_TO_VALUE_RATIO = gql`
+export const CALCULATE_LOAN_TO_VALUE_RATIO = gql`
   query LoanToValueCalc($depositValue: Int!, $purchasePrice: Int!) {
     loanToValueCalc(
       depositValue: $depositValue
@@ -38,12 +38,14 @@ function App() {
           <p className="text-2xl green">1. Details</p>
           <Input
             label="Purchase Price"
+            id="purchasePrice"
             value={purchasePrice}
             handleChange={(e) => setPurchasePrice(e)}
             type="number"
           />
           <Input
             label="Deposit Value"
+            id="depositValue"
             value={depositValue}
             handleChange={(e) => setDepositValue(e)}
             type="number"
@@ -72,7 +74,9 @@ function App() {
         <div className="flex flex-col flex-1 px-10 items-start">
           <p className="text-2xl green">2. Results</p>
           <span className="mt-4 text-sm">Loan to Valuation Ratio (LVR)</span>
-          <span className="text-lg font-semibold mt-2 green">{result}</span>
+          <span className="text-lg font-semibold mt-2 green" role="result">
+            {result}
+          </span>
         </div>
       </div>
     </div>
